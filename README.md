@@ -2,7 +2,7 @@
 
 Instruments Meridian’s three-tier memory and Evaluator reject path with a Jacobian-lens / J-space readout so a human can see *why* a gate fired.
 
-**Status:** Scaffolding – Phase 0
+**Status:** Scaffolding – Phase 0 (family paused 2026-08-19)
 
 Built on Meridian’s gate + independent Evaluator contracts. This is the research-adjacent differentiator in the family, not a replacement for the harness.
 

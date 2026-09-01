@@ -1,0 +1,11 @@
+{
+  "verdict": "fail",
+  "issues": [
+    {
+      "severity": "high",
+      "code": "stub_as_done",
+      "message": "placeholder in artifact"
+    }
+  ],
+  "notes": "synthetic public fixture"
+}

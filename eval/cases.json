@@ -1,0 +1,172 @@
+{
+  "project": "meridian-jspace",
+  "runtime": "mechanical-jspace",
+  "rubric": "https://github.com/PCSchmidt/portfolio-kit/blob/main/docs/EVAL_RUBRIC_TEMPLATE.md",
+  "target_gate_catch": 0.85,
+  "split": "held-out-fixtures",
+  "cases": [
+    {
+      "case_id": "MJS-001",
+      "kind": "good",
+      "failure_mode": null,
+      "expect_verdict": "pass",
+      "expect_act": false,
+      "reject": {
+        "verdict": "fail",
+        "issues": [{ "severity": "high", "code": "stub_as_done", "message": "placeholder" }]
+      }
+    },
+    {
+      "case_id": "MJS-002",
+      "kind": "good",
+      "failure_mode": null,
+      "expect_verdict": "pass",
+      "expect_act": false,
+      "reject": {
+        "verdict": "fail",
+        "issues": [{ "severity": "high", "code": "extra_entity", "message": "F-35 overlay" }]
+      }
+    },
+    {
+      "case_id": "MJS-003",
+      "kind": "good",
+      "failure_mode": null,
+      "expect_verdict": "pass",
+      "expect_act": false,
+      "reject": {
+        "verdict": "fail",
+        "issues": [{ "severity": "high", "code": "self_grade", "message": "generator_self_score leaked" }]
+      }
+    },
+    {
+      "case_id": "MJS-004",
+      "kind": "good",
+      "failure_mode": null,
+      "expect_verdict": "pass",
+      "expect_act": false,
+      "reject": {
+        "verdict": "warn",
+        "issues": [{ "severity": "medium", "code": "missing_citation", "message": "missing_citation" }]
+      }
+    },
+    {
+      "case_id": "MJS-005",
+      "kind": "bad",
+      "failure_mode": "github_write",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "readout": {
+        "schema": "meridian-jspace.readout.v1",
+        "backend": "mechanical",
+        "live_model": false,
+        "github_write": true,
+        "reject": { "verdict": "fail", "issues": [] },
+        "concepts": [{ "id": "stub_as_done", "score": 1 }]
+      }
+    },
+    {
+      "case_id": "MJS-006",
+      "kind": "bad",
+      "failure_mode": "live_model",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "readout": {
+        "schema": "meridian-jspace.readout.v1",
+        "backend": "qwen",
+        "live_model": true,
+        "github_write": false,
+        "reject": { "verdict": "fail", "issues": [] },
+        "concepts": [{ "id": "stub_as_done", "score": 1 }]
+      }
+    },
+    {
+      "case_id": "MJS-007",
+      "kind": "bad",
+      "failure_mode": "extra_entity",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "readout": {
+        "schema": "meridian-jspace.readout.v1",
+        "backend": "mechanical",
+        "live_model": false,
+        "github_write": false,
+        "reject": { "verdict": "fail", "issues": [] },
+        "concepts": [],
+        "summary": "F-35 overlay"
+      }
+    },
+    {
+      "case_id": "MJS-008",
+      "kind": "bad",
+      "failure_mode": "empty_readout",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "reject": {
+        "verdict": "fail",
+        "issues": [],
+        "notes": "blank reject"
+      }
+    },
+    {
+      "case_id": "MJS-009",
+      "kind": "bad",
+      "failure_mode": "bad_schema",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "readout": {
+        "schema": "meridian-jspace.readout.v0",
+        "backend": "mechanical",
+        "live_model": false,
+        "github_write": false,
+        "reject": { "verdict": "fail", "issues": [] },
+        "concepts": [{ "id": "stub_as_done", "score": 1 }]
+      }
+    },
+    {
+      "case_id": "MJS-010",
+      "kind": "bad",
+      "failure_mode": "stub_as_done",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "readout": {
+        "schema": "meridian-jspace.readout.v1",
+        "backend": "mechanical",
+        "live_model": false,
+        "github_write": false,
+        "reject": { "verdict": "fail", "issues": [] },
+        "concepts": [],
+        "notes": "TODO later"
+      }
+    },
+    {
+      "case_id": "MJS-011",
+      "kind": "good",
+      "failure_mode": null,
+      "expect_verdict": "pass",
+      "expect_act": false,
+      "reject": {
+        "verdict": "fail",
+        "issues": [
+          { "severity": "high", "code": "bad_schema", "message": "schema mismatch" },
+          { "severity": "high", "code": "stub_as_done", "message": "coming soon" }
+        ]
+      }
+    },
+    {
+      "case_id": "MJS-012",
+      "kind": "bad",
+      "failure_mode": "webhook_posted",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "readout": {
+        "schema": "meridian-jspace.readout.v1",
+        "backend": "mechanical",
+        "live_model": false,
+        "github_write": false,
+        "webhook_posted": true,
+        "reject": { "verdict": "fail", "issues": [] },
+        "concepts": [{ "id": "stub_as_done", "score": 1 }]
+      }
+    }
+  ]
+}

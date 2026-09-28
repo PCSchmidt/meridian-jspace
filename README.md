@@ -1,6 +1,6 @@
 # meridian-jspace
 
-Instruments Meridian’s three-tier memory and Evaluator reject path with a Jacobian-lens / J-space readout so a human can see *why* a gate fired.
+A readout of Meridian’s Evaluator rejects so a human can see *why* a gate fired. Phase 1 is a mechanical issue-code → concept projection; a live Jacobian-lens / J-space readout on an open-weight model is planned, not built.
 
 **Status:** Phase 1 — mechanical J-space readout
 

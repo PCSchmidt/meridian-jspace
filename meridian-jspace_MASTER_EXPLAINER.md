@@ -10,13 +10,13 @@ Meridian is a sibling project of mine that puts checkpoints around an AI coding 
 
 Reading that record tells you what the Evaluator complained about, but not what kind of failure it was. Was the agent pretending a half-finished piece was done? Did it grade its own work? Did it leave out a required file? meridian-jspace reads a rejection and prints a short list of labels such as "stub as done" or "self grade", with a score beside each. This output is called the readout. It then runs a few fixed checks on the readout and marks it "pass" or "fail". It also always prints "act: false", which means the program only reports. It never recommends or takes an action.
 
-The name comes from the plan. "J-space" is the project's name for a readout drawn from inside a language model, using jacobian-lens, an Apache-2.0 licensed interpretability tool from Anthropic (interpretability is the study of what goes on inside a model) that the README links to. The model would be a small Qwen, one of a family of open-weight language models, meaning their files are freely published and can be run on a laptop. None of that exists yet. What exists today is a "mechanical" stand-in: a fixed word list, no machine-learning model at all. About 180 lines of JavaScript look each reported problem up in the list and print the matching labels.
+The name comes from the plan. I say the idea came from an Anthropic research page, "A global workspace in language models" (https://www.anthropic.com/research/global-workspace), which describes a small set of patterns inside a language model that works like a shared workspace. I have not said why the project is called J-space, and how to describe "J-space" here is undecided. "J-space" is the project's name for a readout drawn from inside a language model, using jacobian-lens, an Apache-2.0 licensed interpretability tool from Anthropic (interpretability is the study of what goes on inside a model) that the README links to. The model would be a small Qwen, one of a family of open-weight language models, meaning their files are freely published and can be run on a laptop. None of that exists yet. What exists today is a "mechanical" stand-in: a fixed word list, no machine-learning model at all. About 180 lines of JavaScript look each reported problem up in the list and print the matching labels.
 
 Three caveats matter, and this is the only place they are stated in full:
 
 - **No model, no real verdicts.** It uses no machine-learning model, and it has never been run on a real Evaluator verdict. The reason is a field-name mismatch. The shared specification repository my projects use, called portfolio-kit, says each problem in a verdict has fields named `artifact`, `severity` and `description`. The program looks for fields named `code` and `message`, which that format does not have. On a verdict written the official way it mostly finds nothing, or falls back on its weaker word matching. The README does not mention this.
 - **Its tests are self-made.** The 7 tests and 12 saved test cases all pass, but they were written alongside the program, and six of the seven "bad" cases are hand-written faulty outputs, not real Evaluator output.
-- **AI wrote the code.** AI coding agents wrote almost all of it. I directed the scope, plan, architecture and preferences.
+- **AI wrote the code.** AI coding agents wrote almost all of it. I do not recall what I decided beyond the written README and contract (the five concepts, the scores, the seven checker rules and the never-act rule).
 
 A calculator gives the same answer for the same input every time; a weather forecast is a best guess that can be wrong. Everything in this repository is a calculator. The forecast part sits just outside it: the Evaluator is an AI model whose opinions can be wrong, and the planned later phases would add a language model.
 
@@ -26,7 +26,7 @@ If you have ten minutes, read this opening, "What it does today", "Does it work?
 
 ## What problem this solves
 
-A person looking at a blocked gate sees a score, a verdict and a list of problems in free text, and has to read them to learn what went wrong. A short list of standard labels would let them scan faster and compare rejections over time. The README says it more broadly: a readout of the rejections "so a human can see why a gate fired". It calls the project "the research-adjacent differentiator in the family" (the family being my set of related projects), "not a replacement for the harness" (the harness being Meridian's checkpoint machinery). Why I started it is not recorded anywhere in the repository. Without it, a person reads the free-text list. The repository does not compare itself with other tools.
+A person looking at a blocked gate sees a score, a verdict and a list of problems in free text, and has to read them to learn what went wrong. A short list of standard labels would let them scan faster and compare rejections over time. The README says it more broadly: a readout of the rejections "so a human can see why a gate fired". It calls the project "the research-adjacent differentiator in the family" (the family being my set of related projects), "not a replacement for the harness" (the harness being Meridian's checkpoint machinery). The repository does not record why it was started; I say the idea came from the Anthropic page named above. Without it, a person reads the free-text list. The repository does not compare itself with other tools.
 
 The README sets out six phases. Phase 1, the mechanical version, is the only one built. The others are: instrumenting the Evaluator's reject path with a small open model (Phase 2), mapping rejection reasons into the model's own concepts (3), a simple visual page (4), experiments that inject deliberately bad outputs to see whether the readout notices (5), and a short technical note (6). Success has been measured only for Phase 1.
 
@@ -47,7 +47,7 @@ A run printed exactly that: three rows, each holding the single label `stub_as_d
 
 ![One rejection through the program, from the sample file to the checked readout](images/meridian-jspace-journey.png)
 
-The "pass" does not mean the rejection was right. It means the readout is well formed and consistent. A rejection the Evaluator got wrong would still give a "pass" readout.
+The "pass" does not mean the rejection was right. It means the readout is well formed and consistent. A rejection the Evaluator got wrong would still give a "pass" readout. I cannot yet explain this unaided.
 
 A mailroom clerk is a fair comparison: the clerk stamps each incoming complaint letter with a category from a printed list and does not judge whether the complaint is fair. It breaks down because the clerk understands the letter, while the program matches words and can be fooled by words that merely appear in the text.
 
@@ -85,7 +85,7 @@ A "schema" here means a written description of what shape a record should have. 
 
 This project uses no machine-learning model today. The chapter that would be the longest in a model project is a plan.
 
-The README names Qwen and jacobian-lens, introduced above, for Phase 2. It says only "a small Qwen checkpoint" (one saved version of the model) and does not pick one. A code comment calls the mechanical mapping "analogous to jacobian-lens unembedding", but the repository does not explain what jacobian-lens computes, and this guide does not describe it from memory. Phase 1 imitates the shape of the output, not the method. Nothing here looks inside a model, and whether the planned J-space readout would show anything useful about a rejection is untested. Phase 5 is meant to test exactly that question: whether the readout truthfully reflects what the model is doing. Until then, the refusal rules are the only safeguard that applies to the planned parts.
+The README names Qwen and jacobian-lens, introduced above, for Phase 2. It says only "a small Qwen checkpoint" (one saved version of the model) and does not pick one. A code comment calls the mechanical mapping "analogous to jacobian-lens unembedding", but the repository does not explain what jacobian-lens computes, and this guide does not describe it from memory. I am unsure whether I understand the planned goal well enough to explain it, so what the guide should say about it is open. Phase 1 imitates the shape of the output, not the method. Nothing here looks inside a model, and whether the planned J-space readout would show anything useful about a rejection is untested. Phase 5 is meant to test exactly that question: whether the readout truthfully reflects what the model is doing. Until then, the refusal rules are the only safeguard that applies to the planned parts.
 
 ## Edge cases, testing and safeguards
 
@@ -120,7 +120,7 @@ The strengths are modest and checkable. The README now says plainly what is buil
 
 Four shortcomings matter, in order.
 
-**1. The program has not been shown to work on a real verdict.** The field names are the cause (see "What it is"). A test call with a verdict shaped as portfolio-kit's schema requires (its own example file lists no problems, so I added one), with a problem described as "Tests were not run before the feature was marked complete", gave no concepts and a failed, empty readout. With a description that happened to contain "TODO placeholders" it found "stub as done" at 0.85 by word match, and row 0 listed the problem as "unknown". I do not know whether the Evaluator in Meridian writes extra fields. There are two fixes: read the real fields (small effort, and it makes the project work on real data) or add codes to the shared format (larger, because it changes a contract other projects rely on). The first is better, with a test that reads the example file from portfolio-kit.
+**1. The program has not been shown to work on a real verdict.** The field names are the cause (see "What it is"). A test call with a verdict shaped as portfolio-kit's schema requires (its own example file lists no problems, so I added one), with a problem described as "Tests were not run before the feature was marked complete", gave no concepts and a failed, empty readout. With a description that happened to contain "TODO placeholders" it found "stub as done" at 0.85 by word match, and row 0 listed the problem as "unknown". I am unsure what real Evaluator rejections look like, including whether they carry issue codes, and I do not think I have saved any real rejections. There are two fixes: read the real fields (small effort, and it makes the project work on real data) or add codes to the shared format (larger, because it changes a contract other projects rely on). The first is better, with a test that reads the example file from portfolio-kit.
 
 **2. The word matching is too loose.** It looks for pieces inside words, so "military" and "unclassified" trigger the wrong concept. Matching whole words fixes it with a few lines. Smaller robustness gaps sit here too: a non-list problem field crashes the program, and an empty rejection passes silently.
 
@@ -128,15 +128,15 @@ Four shortcomings matter, in order.
 
 **4. The layers are decoration**, as described above, and should be read that way.
 
-On completeness, one phase of six is built. The status note's own next step is Phase 2, with the instruction not to start the red-team project. Whether Phase 2 is worth doing is a choice only I can make; the repository gives no hint of how much time I plan to give it, and an earlier commit message says the family was paused.
+On completeness, one phase of six is built. The status note's own next step is Phase 2, with the instruction not to start the red-team project. I probably do not consider Phase 1 finished. Which later phases I want and how much time to give them are not chosen. The second commit's message reads "Note family pause; stay on Phase 0. Not the resume default." Whether to fix the field-name mismatch and the word matching before Phase 2 is left to a recommendation, not decided.
 
 ## How it was built, and who did what
 
-The repository has four commits between 19 August and 28 September 2026. Only the last, the README edit, carries an AI co-author credit; the other three carry none, and the first has a placeholder email address in its author line. So the history does not say which tool wrote the Phase 1 code. The instruction file for AI agents sets the do and do-not rules summarised earlier. The only checks on the agents' work that the history shows are the tests, the saved cases and the narrowing of the README. Whether I read or rewrote any generated code, how I carried context between sessions and what I decided beyond the written scope are questions for me, not answered by the repository.
+The repository has four commits between 19 August and 28 September 2026. Only the last, the README edit, carries an AI co-author credit; the other three carry none, and the first commit used a placeholder email; I say my own account email was intended, and whether to rewrite history is not decided. So the history does not say which tool wrote the Phase 1 code. The instruction file for AI agents sets the do and do-not rules summarised earlier. The only checks on the agents' work that the history shows are the tests, the saved cases and the narrowing of the README. I say nobody besides me has run or read it. I assume I carried context in one agent session window but am unsure. I do not recall whether the 12 cases were written before or after the checker, what was hardest or what surprised me, or whether the gates in the gate list ever ran. I understand all the parts to some degree only. Whether I read or rewrote generated code is not answered.
 
 ## For recruiters and interviewers
 
-In thirty seconds: I directed AI coding agents to build a small program that labels an AI judge's rejections with a fixed word list, plus fixed checks that stop it ever claiming to act, write to GitHub or run a model. It works on its own test cases. The model-based part that gives the project its name is not built.
+In thirty seconds: AI coding agents built a small program that labels an AI judge's rejections with a fixed word list, plus fixed checks that stop it ever claiming to act, write to GitHub or run a model. It works on its own test cases. The model-based part that gives the project its name is not built.
 
 | Typical requirement | What this project shows | Strength |
 | --- | --- | --- |
@@ -145,7 +145,7 @@ In thirty seconds: I directed AI coding agents to build a small program that lab
 | Working with a language model or interpretability tool | None yet: planned only | Not shown |
 | Deploying and operating | Nothing hosted, no real data | Not shown |
 
-How do I know it works? On 12 made-up cases it matches the expected verdicts, and nothing more is shown. It should not be claimed that it reads a model's insides, that it works on real judge output, or that I wrote the code by hand.
+How do I know it works? On 12 made-up cases it matches the expected verdicts, and nothing more is shown. It should not be claimed that it reads a model's insides, that it works on real judge output, or that I wrote the code by hand. I like having projects in several languages to show breadth and flexibility; I am unsure why this one uses JavaScript. The roles I am open to are AI Engineer or Forward Deployed Engineer.
 
 ## Where to look in the code
 

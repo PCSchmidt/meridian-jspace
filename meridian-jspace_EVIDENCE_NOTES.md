@@ -8,7 +8,7 @@ Companion to meridian-jspace.md. Labels: Confirmed, Ran it, Per the docs, My rea
 - Kind: Node.js command-line library plus saved eval cases. Status per README/STATUS: "Phase 1, mechanical J-space readout".
 - Size: src 179 lines (concepts.js 40, project.js 112, run.js 27); tests 95 lines (two files); eval/run.js 91; eval/cases.json 172 lines. No dependencies (package.json has none; no node_modules). Confirmed (wc -l).
 - Tests: 7 pass, 0 fail, 0 skipped (Ran it: `npm test`, Node v24.19.0). Eval: ok true, 12 cases (5 good, 7 bad), D3 catch 1.0 (n=7), agreement 1.0, known_bad_no_act 1.0 (Ran it: `node eval/run.js`). Matches STATUS.md ("npm test 7/7; D3 catch 1.0 (n=7); agreement 1.0").
-- Commits: 4, 2026-08-19 to 2026-09-28 (4d4f052, d792ef4, c56f6d1, 374e90f). Only 374e90f carries a Co-Authored-By trailer (an AI coding agent). First commit's author line has a placeholder email (your-github-email@example.com). No agent settings folders; AGENTS.md is present.
+- Commits: 4, 2026-08-19 to 2026-09-28 (4d4f052, d792ef4, c56f6d1, 374e90f). Only 374e90f carries a Co-Authored-By trailer (an AI coding agent). First commit's author line has a placeholder email. No agent settings folders; AGENTS.md is present.
 - Runs from a clean copy: yes, Node 20+ required (CI uses 20; local run used 24.19.0).
 - Needs: nothing paid, no GPU, no network, no downloads.
 - Deployed: no. Users: none known (Ask the author).
@@ -144,3 +144,27 @@ Backlog: Fix S1 and S2 (small, high payoff); Finish by running on real rejection
 Images in images/meridian-jspace-*.png, regenerated after the reader check (matplotlib, scratchpad venv): parts (now shows the Evaluator as source, Qwen replacing the mapper, jacobian-lens filling the readout, a visual page as Phase 4), journey (four steps matching the text; checker as its own box; Row 0 shown without a score because projectReject gives every issue token a constant score of 1, which the guide now states as meaningless), eval-cases (replaced the 12-bar chart with a 5 good / 7 bad summary; counts from cases.json: good MJS-001-004 and 011, bad 005-010 and 012; 6 of 7 bad cases carry a hand-written readout, MJS-008 is a reject).
 
 Reader-check revision: guide trimmed to about 3,600 words; caveats (no real verdict, AI wrote code, layers are decoration) stated once in full; file line counts removed from the guide (E1 retains them); 65% bound restated (second review) as about 0.65, one-sided; two-sided Clopper-Pearson lower bound is about 0.59; terms defined at first use. No factual claims changed.
+
+## Author answers folded in, 2026-11-05
+
+Source: answers appended to the 19 questions in meridian-jspace.questions.md. Label: Author says. Repo clone re-pulled (HEAD 766b20d, the explainer files; the project's own last commit is 374e90f).
+
+- Q1: Author says the idea came from an Anthropic research page. Page fetched (read only): title "A global workspace in language models"; it describes a small set of patterns inside Claude that works like a global workspace and that the page calls J-space. Cited in the guide. Why the project is named J-space is not answered.
+- Q2: Unsure he understands the planned jacobian-lens goal well enough to explain; defers to recommendation. Guide keeps its restraint; open.
+- Q3: Unsure why JavaScript/Node; says he likes multi-language projects to show breadth and flexibility. Stated as his liking, not as the reason.
+- Q4: Nobody besides him has run or read it. Stated.
+- Q5: Unsure what real Evaluator rejections look like. Format-mismatch finding unchanged, with "I am unsure what real rejections look like".
+- Q6: Does not think he has saved real rejections. Stated.
+- Q7: Tool named in the questions file only; guide says "AI coding agents".
+- Q8: Says his intended email is his account email. No address in guide or evidence; history rewrite not decided.
+- Q9: Does not recall decisions beyond README/contract. Wording crediting him removed.
+- Q10: Does not recall whether the 12 cases came before or after the checker. Stated.
+- Q11: Assumes one session window; unsure. Stated as his assumption.
+- Q12: Unsure whether the gates ever ran. Stated.
+- Q13: Does not recall what was hardest or surprising. Stated.
+- Q14: Understands all parts to some degree only. Stated.
+- Q15: Cannot explain unaided why "pass" does not mean the rejection was right. Stated plainly.
+- Q16: Phase 1 probably not finished. Commit d792ef4 message: "Note family pause; stay on Phase 0. Not the resume default." (its diff marks the family paused 2026-08-19). Phases and time not chosen.
+- Q17: Defers to recommendation on fixing the format mismatch and word matching before Phase 2. Open.
+- Q18: Roles he names: AI Engineer or Forward Deployed Engineer. Stated as roles he is open to, no fit rating.
+- Q19: Defers to recommendation; guide sentence kept, marked undecided.
